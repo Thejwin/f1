@@ -142,13 +142,13 @@ def main() -> None:
     print(f"Exported driver standings to {driver_csv} and constructor standings to {constructor_csv}.")
 
     # Print compact top-10 summaries
-    print("\nTop 10 drivers:")
+    print("\nDriver standings:")
     driver_cols = [c for c in ["DriverId", "FullName", "TeamName", "PointsEarned"] if c in driver_standings.columns]
-    print(driver_standings[driver_cols].head(10).to_string(index=False))
+    print(driver_standings[driver_cols].head(22).to_string(index=False))
 
-    print("\nTop 10 constructors:")
+    print("\nConstructer standings:")
     team_cols = [c for c in ["TeamId", "TeamName", "PointsEarned"] if c in constructor_standings.columns]
-    print(constructor_standings[team_cols].head(10).to_string(index=False))
+    print(constructor_standings[team_cols].head(11).to_string(index=False))
 
 
 if __name__ == "__main__":

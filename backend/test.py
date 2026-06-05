@@ -1,3 +1,4 @@
-import datetime
-
-print(type(datetime.datetime.now().year))
+import fastapi
+import pandas
+import pydantic
+import sqlalchemy

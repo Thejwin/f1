@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# Build output
+dist/
+build/
+out/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/project files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Python virtual environments
+env/
+env/**
+.venv/
+venv/
+venv/**
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# Test and tooling
+.pytest_cache/
+.mypy_cache/
+
+# Local files
+.env
+*.env
+
+# Generated standings
+standings_drivers.csv
+standings_constructors.csv
+
+# OS
+.DS_Store
+Thumbs.db
