@@ -58,7 +58,10 @@ pip-wheel-metadata/
 # Generated standings
 standings_drivers.csv
 standings_constructors.csv
-
+.csv
+# Local dev-only scripts
+inspect_fastf1.py
+test.py
 # OS
 .DS_Store
 Thumbs.db

@@ -1,7 +1,10 @@
+from src.services.standings_service import get_standings
+
+
 def get_driver_standings():
-    # Logic to get driver standings for the given season
-    pass
+    return get_standings(kind='driver')
+
 
 def get_constructor_standings():
-    # Logic to get constructor standings for the given season
-    pass
+    return get_standings(kind='constructor')
+
