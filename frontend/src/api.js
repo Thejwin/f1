@@ -1,26 +1,24 @@
 const canada26racekey = 11291
 
-export const fetchCarData = () => {
+export const fetchDriverStandings = () => {
   return fetch(
-    "https://api.openf1.org/v1/car_data?driver_number=55&session_key=11291&speed>=315",
+    `http://127.0.0.1:8000/driver-standings/`,
   )
     .then((response) => response.json())
-    .then((jsonContent) => console.log(jsonContent));
+    .then((jsonContent) => {
+      console.log(jsonContent);
+      return jsonContent;
+    });
 };
 
-export const fetchChampionshipDrivers = () => {
+export const fetchConstructorStandings = () => {
   return fetch(
-    `https://api.openf1.org/v1/championship_drivers?session_key=${canada26racekey}&driver_number=81&driver_number=3`,
+    `http://127.0.0.1:8000/constructor-standings/`,
   )
     .then((response) => response.json())
-    .then((jsonContent) => console.log(jsonContent));
-};
-
-export const fetchSessions = () => {
-  return fetch(
-    `https://api.openf1.org/v1/sessions?country_name=Canada&session_name=Race&year=2026`,
-  )
-    .then((response) => response.json())
-    .then((jsonContent) => console.log(jsonContent));
+    .then((jsonContent) => {
+      console.log(jsonContent);
+      return jsonContent;
+    });
 };
 

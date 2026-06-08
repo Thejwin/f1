@@ -1,10 +1,10 @@
 import React from 'react'
-
+// temp
 const Navbar = () => {
   return (
-    <div>
-        navbar
-    </div>
+    <nav className='navbar'>
+      <span className='nav-brand'>F1 STATS</span>
+    </nav>
   )
 }
 

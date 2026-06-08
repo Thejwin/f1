@@ -10,7 +10,7 @@ from src.models.standings_models import DriverStanding, ConstructorStanding
 
 # reuse existing build_standings function from backend/standings.py
 try:
-    import standings as local_standings
+    import src.services.standings as local_standings
 except Exception:
     local_standings = None
 
@@ -88,13 +88,16 @@ def recompute_and_store(year: int) -> Dict[str, List[Dict]]:
         session.commit()
 
         now = datetime.datetime.utcnow()
-        # insert drivers
+        # insert drivers (skip those with null or empty DriverId)
         for _, r in driver_df.iterrows():
+            driver_id = r['DriverId'] if not pd.isna(r['DriverId']) else None
+            if not driver_id or str(driver_id).strip() == '':
+                continue
             ds = DriverStanding(
-                driver_id=r.get('DriverId') or r.get('DriverId'.lower()),
-                full_name=r.get('FullName') or r.get('full_name'),
-                team_name=r.get('TeamName') or r.get('TeamName'.lower()),
-                points_earned=float(r.get('PointsEarned') or 0.0),
+                driver_id=str(driver_id),
+                full_name=r['FullName'] if not pd.isna(r['FullName']) else '',
+                team_name=r['TeamName'] if not pd.isna(r['TeamName']) else '',
+                points_earned=float(r['PointsEarned'] or 0.0),
                 updated_at=now,
             )
             # set pos_i fields dynamically
@@ -107,7 +110,7 @@ def recompute_and_store(year: int) -> Dict[str, List[Dict]]:
         # insert constructors
         for _, r in constructor_df.iterrows():
             cs = ConstructorStanding(
-                team_name=r.get('TeamName') or r.get('team_name'),
+                team_name=r['TeamName'] if not pd.isna(r['TeamName']) else '',
                 points_earned=float(r.get('PointsEarned') or 0.0),
                 updated_at=now,
             )

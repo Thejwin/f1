@@ -1,0 +1,89 @@
+.standing-entry {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: var(--card-bg, rgba(255,255,255,0.05));
+    border-left: 3px solid var(--accent, #e10600);
+    transition: background 0.2s, transform 0.15s;
+    cursor: default;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 56px;
+}
+
+.standing-entry:hover {
+    background: var(--card-hover, rgba(255,255,255,0.09));
+    transform: translateX(4px);
+}
+
+.standing-entry .position {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-muted, #888);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.standing-entry .driver-id {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-h, #f3f4f6);
+    flex: 3;
+    min-width: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.standing-entry .team {
+    font-size: 0.9rem;
+    color: var(--text, #9ca3af);
+    flex: 2;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    padding-right: 12px;
+}
+
+.standing-entry .points {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent, #e10600);
+    min-width: 70px;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.standing-entry .points-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted, #888);
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+    .standing-entry {
+        gap: 8px;
+        padding: 10px 12px;
+        min-height: 48px;
+    }
+    .standing-entry .driver-id {
+        font-size: 0.95rem;
+        flex: 1; /* Take priority over team on mobile */
+    }
+    .standing-entry .team {
+        display: none; /* Hide team name on mobile screens to prioritize driver name */
+    }
+    .standing-entry .points {
+        font-size: 0.95rem;
+        min-width: 55px;
+    }
+}
