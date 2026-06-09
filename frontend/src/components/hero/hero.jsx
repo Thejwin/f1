@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './hero.css'
 import Driver_standings from './driver_standings'
 import Constructor_standings from './constructor_standings'
 
@@ -8,6 +9,7 @@ const Hero = ({ driver, constructor: constructorData }) => {
   return (
     <div className="hero-section">
       <div className="standings-header">
+        <div>Standings</div>
         <div className="standings-tabs">
           <button 
             className={`standings-tab ${activeTab === 'drivers' ? 'active' : ''}`}

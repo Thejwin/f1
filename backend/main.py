@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.utils.db import Base, engine
-from src.models.standings_models import DriverStanding, ConstructorStanding
+from src.models import DriverStanding, ConstructorStanding, Schedule
 from src.routes.standings_routes import driver_standings_router, constructor_standings_router
 from fastapi.middleware.cors import CORSMiddleware
 

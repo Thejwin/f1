@@ -1,24 +1,7 @@
-const canada26racekey = 11291
+export const fetchDriverStandings = () =>
+  fetch(`http://127.0.0.1:8000/driver-standings/`).then((res) => res.json());
 
-export const fetchDriverStandings = () => {
-  return fetch(
-    `http://127.0.0.1:8000/driver-standings/`,
-  )
-    .then((response) => response.json())
-    .then((jsonContent) => {
-      console.log(jsonContent);
-      return jsonContent;
-    });
-};
+export const fetchConstructorStandings = () =>
+  fetch(`http://127.0.0.1:8000/constructor-standings/`).then((res) => res.json());
 
-export const fetchConstructorStandings = () => {
-  return fetch(
-    `http://127.0.0.1:8000/constructor-standings/`,
-  )
-    .then((response) => response.json())
-    .then((jsonContent) => {
-      console.log(jsonContent);
-      return jsonContent;
-    });
-};
 
