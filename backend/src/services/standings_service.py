@@ -34,7 +34,7 @@ def _get_last_completed_race_datetime(year: int) -> Optional[datetime.datetime]:
     if not date_cols:
         return None
     
-    """ Cache the schedule to avoid repeated API calls in future. 
+    """ switch db for schedules. 
         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
     """
@@ -77,7 +77,7 @@ def recompute_and_store(year: int) -> Dict[str, List[Dict]]:
         raise RuntimeError("standings module not available")
     schedule = fastf1.get_event_schedule(year) 
 
-    """ CACHE!!!!!!! """
+    """ schedules db!! """
 
     driver_df, constructor_df = local_standings.build_standings(schedule, year)
 

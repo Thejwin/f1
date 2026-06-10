@@ -28,7 +28,13 @@ A lightweight web application for tracking Formula 1 statistics.
    ```
 3. Run the FastAPI development server:
    ```bash
-   uvicorn main:app --reload
+   fastapi dev main.py --reload
+   ```
+   ```Command prompt
+   env\Scripts\activate.bat
+   ```
+   ```Powershell
+   .\env\Scripts\Activate.ps1
    ```
 
 ### Frontend Setup

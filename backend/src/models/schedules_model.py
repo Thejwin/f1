@@ -34,5 +34,5 @@ class Schedule(Base):
     Session5Date = Column("Session5Date", DateTime, nullable=True)
     Session5DateUtc = Column("Session5DateUtc", DateTime, nullable=True)
 
-    F1ApiSupport = Column("F1ApiSupport", Boolean, nullable=False)
+    F1ApiSupport = Column("F1ApiSupport", Boolean)
     
