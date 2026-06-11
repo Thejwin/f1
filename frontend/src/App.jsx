@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home'
+import SchedulePage from './pages/SchedulePage'
 import './App.css'
 import { fetchConstructorStandings, fetchDriverStandings } from './api'
 
@@ -12,8 +14,11 @@ function App() {
   useEffect(() => {
     async function loadData() {
       try {
-        const driverData = await fetchDriverStandings();
-        const constructorData = await fetchConstructorStandings();
+        const [driverData, constructorData] = await Promise.all([
+          fetchDriverStandings(),
+          fetchConstructorStandings()
+        ]);
+
         setDriver_standings(driverData);
         setConstructor_standings(constructorData);
       } catch (error) {
@@ -28,7 +33,13 @@ function App() {
   return (
     <>
 
-      <Home driver={driver_standings} constructor={constructor_standings} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home driver={driver_standings} constructor={constructor_standings} />} />
+          <Route path="/schedule" element={<SchedulePage />} />
+        </Routes>
+      </BrowserRouter>
+
 
     </>
   )
