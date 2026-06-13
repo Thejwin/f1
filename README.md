@@ -23,18 +23,21 @@ A lightweight web application for tracking Formula 1 statistics.
 2. Set up a virtual environment and install dependencies:
    ```bash
    python -m venv env
-   env\Scripts\activate
+
+   # Windows (Command Prompt)
+   env\Scripts\activate.bat
+
+   # Windows (PowerShell)
+   .\env\Scripts\Activate.ps1
+
+   # macOS / Linux
+   source env/bin/activate
+
    pip install -r requirements.txt
    ```
 3. Run the FastAPI development server:
    ```bash
    fastapi dev main.py --reload
-   ```
-   ```Command prompt
-   env\Scripts\activate.bat
-   ```
-   ```Powershell
-   .\env\Scripts\Activate.ps1
    ```
 
 ### Frontend Setup

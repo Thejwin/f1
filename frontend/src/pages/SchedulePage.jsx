@@ -28,7 +28,7 @@ const SchedulePage = () => {
             <h1>Schedule</h1>
             <ul>
                 {schedule.map((event, i) => (
-                    <li key={i}>{event.RoundNumber}. {event.OfficialEventName.slice(10)}, {event.Country} - {event.Location}</li>
+                    <li key={i}>{event.RoundNumber}. {event.EventName}, {event.Country} - {event.Location}</li>
                 ))}
             </ul>
         </div>
