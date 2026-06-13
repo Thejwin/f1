@@ -1,6 +1,7 @@
 import { fetchSchedule } from "../api";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/navbar";
+import "./SchedulePage.css";
 
 const SchedulePage = () => {
 
@@ -20,18 +21,38 @@ const SchedulePage = () => {
     }, [])
 
     if (loading) {
-        return <div>Loading schedule data…</div>;
+        return (
+            <>
+                <Navbar />
+                <div className="schedule-container">
+                    <div style={{ marginTop: "40px" }}>Loading schedule data…</div>
+                </div>
+            </>
+        );
     }
-    else return (
-        <div>
+    
+    return (
+        <>
             <Navbar />
-            <h1>Schedule</h1>
-            <ul>
+            <div className="schedule-container">
+                <h1>Schedule</h1>
+                <ul className="schedule-list">
                 {schedule.map((event, i) => (
-                    <li key={i}>{event.RoundNumber}. {event.EventName}, {event.Country} - {event.Location}</li>
+                    <li className="schedule-item" key={i}>
+                        <div className="schedule-round">
+                            R{event.RoundNumber}
+                        </div>
+                        <div className="schedule-details">
+                            <div className="schedule-title">{event.EventName}</div>
+                            <div className="schedule-location">
+                                {event.Location}, {event.Country}
+                            </div>
+                        </div>
+                    </li>
                 ))}
             </ul>
         </div>
+        </>
     )
 }
 
