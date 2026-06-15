@@ -7,6 +7,32 @@
   box-sizing: border-box;
 }
 
+.schedule-header-wrapper {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.year-selector {
+  background: var(--bg-surface);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.year-selector:focus {
+  border-color: var(--accent);
+}
+
 .schedule-list {
   list-style: none;
   padding: 0;
