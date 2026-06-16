@@ -44,6 +44,11 @@
   margin: 24px 0;
 }
 
+.schedule-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .schedule-item {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -51,8 +56,9 @@
   padding: 16px 24px;
   display: flex;
   align-items: center;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.15s;
   text-align: left;
+  cursor: pointer;
 }
 
 .schedule-item:hover {

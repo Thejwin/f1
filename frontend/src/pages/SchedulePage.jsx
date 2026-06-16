@@ -1,5 +1,6 @@
 import { fetchSchedule } from "../api";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import "./SchedulePage.css";
 
@@ -23,16 +24,16 @@ const SchedulePage = () => {
                 setLoading(false);
             });
     }, [selectedYear])
-    
+
     return (
         <>
             <Navbar />
             <div className="schedule-container">
                 <div className="schedule-header-wrapper">
                     <h1>Schedule</h1>
-                    <select 
-                        className="year-selector" 
-                        value={selectedYear} 
+                    <select
+                        className="year-selector"
+                        value={selectedYear}
                         onChange={(e) => setSelectedYear(parseInt(e.target.value))}
                     >
                         {years.map(year => (
@@ -40,13 +41,14 @@ const SchedulePage = () => {
                         ))}
                     </select>
                 </div>
-                
+
                 {loading ? (
                     <div style={{ marginTop: "40px" }}>Loading schedule data…</div>
                 ) : (
                     <ul className="schedule-list">
                         {schedule.map((event, i) => (
-                            <li className="schedule-item" key={i}>
+                            <Link to={`/schedule/${selectedYear}/${event.RoundNumber}`} key={i} className="schedule-item-link">
+                            <li className="schedule-item">
                                 <div className="schedule-round">
                                     R{event.RoundNumber}
                                 </div>
@@ -57,6 +59,7 @@ const SchedulePage = () => {
                                     </div>
                                 </div>
                             </li>
+                            </Link>
                         ))}
                     </ul>
                 )}

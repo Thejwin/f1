@@ -138,5 +138,5 @@ def backfill_results(start_year: int, end_year: int):
                     time.sleep(2)
                     
 if __name__ == "__main__":
-    backfill_results(2018, 2018)
+    backfill_results(2022, 2022)
     print("Done!")

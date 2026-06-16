@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home'
 import SchedulePage from './pages/SchedulePage'
+import EventPage from './pages/EventPage'
+import SessionResultsPage from './pages/SessionResultsPage'
 import './App.css'
 import { fetchConstructorStandings, fetchDriverStandings } from './api'
 
@@ -37,6 +39,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home driver={driver_standings} constructor={constructor_standings} />} />
           <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/schedule/:year/:round" element={<EventPage />} />
+          <Route path="/schedule/:year/:round/:sessionId" element={<SessionResultsPage />} />
         </Routes>
       </BrowserRouter>
 
