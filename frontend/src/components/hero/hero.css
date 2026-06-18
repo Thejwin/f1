@@ -9,6 +9,17 @@
 /* ---- Standings Header & Tabs ---- */
 .standings-header {
   margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.standings-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: aliceblue;
 }
 
 .standings-tabs {
@@ -36,7 +47,7 @@
 
 .standings-tab:hover {
   color: var(--text-h);
-  background: rgba(255,255,255, 0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .standings-tab.active {

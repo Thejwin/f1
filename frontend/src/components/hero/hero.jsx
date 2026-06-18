@@ -9,15 +9,15 @@ const Hero = ({ driver, constructor: constructorData }) => {
   return (
     <div className="hero-section">
       <div className="standings-header">
-        <div>Standings</div>
+        <div className="standings-title"  >Standings</div>
         <div className="standings-tabs">
-          <button 
+          <button
             className={`standings-tab ${activeTab === 'drivers' ? 'active' : ''}`}
             onClick={() => setActiveTab('drivers')}
           >
             Drivers
           </button>
-          <button 
+          <button
             className={`standings-tab ${activeTab === 'constructors' ? 'active' : ''}`}
             onClick={() => setActiveTab('constructors')}
           >
@@ -26,7 +26,7 @@ const Hero = ({ driver, constructor: constructorData }) => {
         </div>
       </div>
 
-      {activeTab === 'drivers' 
+      {activeTab === 'drivers'
         ? <Driver_standings driver={driver} />
         : <Constructor_standings constructor={constructorData} />
       }
