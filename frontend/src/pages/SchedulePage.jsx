@@ -12,6 +12,13 @@ const SchedulePage = () => {
     const [loading, setLoading] = useState(true);
     const [selectedYear, setSelectedYear] = useState(currentYear);
 
+    function getDate(session1date, session5date, session3date) {
+        const session1 = new Date(`${session1date}Z`);
+        const session2 = session5date == null ? new Date(`${session3date}Z`) : new Date(`${session5date}Z`);
+        const options = { month: 'short', day: 'numeric' }
+        return `${session1.toLocaleDateString(undefined, options)} - ${session2.toLocaleDateString(undefined, options)}`;
+    }
+
     useEffect(() => {
         setLoading(true);
         fetchSchedule(selectedYear)
@@ -48,17 +55,18 @@ const SchedulePage = () => {
                     <ul className="schedule-list">
                         {schedule.map((event, i) => (
                             <Link to={`/schedule/${selectedYear}/${event.RoundNumber}`} key={i} className="schedule-item-link">
-                            <li className="schedule-item">
-                                <div className="schedule-round">
-                                    R{event.RoundNumber}
-                                </div>
-                                <div className="schedule-details">
-                                    <div className="schedule-title">{event.EventName}</div>
-                                    <div className="schedule-location">
-                                        {event.Location}, {event.Country}
+                                <li className="schedule-item">
+                                    <div className="schedule-round">
+                                        R{event.RoundNumber}
                                     </div>
-                                </div>
-                            </li>
+                                    <div className="schedule-details">
+                                        <div className="schedule-title">{event.EventName}</div>
+                                        <div className="schedule-location">
+                                            {event.Location}, {event.Country}
+                                        </div>
+                                    </div>
+                                    <div className="schedule-time">{getDate(event.Session1DateUtc, event.Session5DateUtc, event.Session3DateUtc)}</div>
+                                </li>
                             </Link>
                         ))}
                     </ul>
