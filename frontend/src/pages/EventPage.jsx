@@ -15,7 +15,7 @@ const SESSION_MAP = {
     sprint: [
         { id: "FP1", name: "Practice 1" },
         { id: "Q", name: "Qualifying" },
-        { id: "SQ", name: "Sprint Qualifying" },
+        { id: "FP2", name: "Practice 2" },
         { id: "S", name: "Sprint" },
         { id: "R", name: "Race" },
     ],
@@ -28,9 +28,9 @@ const SESSION_MAP = {
     ],
     sprint_qualifying: [
         { id: "FP1", name: "Practice 1" },
-        { id: "FP2", name: "Practice 2" },
-        { id: "Q", name: "Qualifying" },
         { id: "SQ", name: "Sprint Qualifying" },
+        { id: "S", name: "Sprint" },
+        { id: "Q", name: "Qualifying" },
         { id: "R", name: "Race" },
     ],
     default: [

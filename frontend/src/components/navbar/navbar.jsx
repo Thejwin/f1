@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar'>
-      <span className='nav-brand'>F1 STATS</span>
+      <span className='nav-brand' onClick={() => navigate("/")}>F1 STATS</span>
       <div className="nav-links">
         <button className="nav-btn" onClick={() => navigate("/")}>
           Home

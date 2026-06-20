@@ -44,11 +44,11 @@ def backfill_results(start_year: int, end_year: int):
                     session_identifiers.extend(['FP1', 'FP2', 'FP3', 'Q'])
                 elif event_format == 'sprint':
                     # modern sprint format
-                    session_identifiers.extend(['FP1', 'Q', 'SQ', 'S'])
+                    session_identifiers.extend(['FP1', 'Q', 'FP2', 'S'])
                 elif event_format == 'sprint_shootout': # 2023
                     session_identifiers.extend(['FP1', 'Q', 'SS', 'S'])
                 elif event_format == 'sprint_qualifying': # 2021-2022
-                    session_identifiers.extend(['FP1', 'FP2', 'Q', 'SQ'])
+                    session_identifiers.extend(['FP1', 'SQ', 'S', 'Q'])
                 else:
                     # Default fallback
                     session_identifiers.extend(['FP1', 'Q'])
@@ -138,5 +138,5 @@ def backfill_results(start_year: int, end_year: int):
                     time.sleep(2)
                     
 if __name__ == "__main__":
-    backfill_results(2024, 2024) # Do 1 yr at a time due to api limits
+    backfill_results(2025, 2025) # Do 1 yr at a time due to api limits
     print("Done!")
