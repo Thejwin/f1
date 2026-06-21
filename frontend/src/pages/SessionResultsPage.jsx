@@ -56,7 +56,7 @@ const SessionResultsPage = () => {
                             <tbody>
                                 {results.map((r, idx) => (
                                     <tr key={idx}>
-                                        <td className="col-pos">{r.position}</td>
+                                        <td className="col-pos">{r.position === null ? idx + 1 : r.position}</td>
                                         <td>{r.driver_number}</td>
                                         <td className="col-driver">
                                             {r.full_name || r.broadcast_name || r.driver_abbreviation}

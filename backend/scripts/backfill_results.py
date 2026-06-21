@@ -138,5 +138,5 @@ def backfill_results(start_year: int, end_year: int):
                     time.sleep(2)
                     
 if __name__ == "__main__":
-    backfill_results(2025, 2025) # Do 1 yr at a time due to api limits
+    backfill_results(2026, 2026) # Do 1 yr at a time due to api limits
     print("Done!")
