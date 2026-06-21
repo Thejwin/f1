@@ -68,13 +68,13 @@ def backfill_results(start_year: int, end_year: int):
                     print(f"    Fetching {session_id}...")
                     try:
                         f1_session = fastf1.get_session(year, round_number, session_id)
-                        f1_session.load(telemetry=False, weather=False, messages=False) # Load only results
+                        f1_session.load(telemetry=False, weather=False, messages=True) # Needs messages to calculate quali results
                         results = f1_session.results
                         
                         if results is None or results.empty:
                             print(f"      No results data available for {session_id}")
                             continue
-                            
+
                         new_records = []
                         for _, row in results.iterrows():
                             # Safely extract values, handling NaNs
