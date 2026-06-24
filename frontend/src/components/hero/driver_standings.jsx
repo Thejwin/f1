@@ -16,12 +16,12 @@ const Driver_standings = ({ driver }) => {
     <div className="standings-container">
       <div className='standings-list'>
         {displayedStandings.map((entry, i) => (
-            <Standing_entry 
-                key={entry.driver_id}
-                index={i + 1}
-                id={entry.full_name} 
-                team={entry.team_name} 
-                points={entry.points_earned} />
+          <Standing_entry
+            key={entry.driver_id}
+            index={i + 1}
+            id={entry.full_name}
+            team={entry.team_name}
+            points={entry.points_earned} />
         ))}
       </div>
       {standingsArray.length > 10 && (
