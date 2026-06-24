@@ -1,0 +1,12 @@
+.position-chart-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px, 0;
+    background-color: #15151e;
+    border-radius: 8px;
+    margin: 10% 0;
+}
+
+.position-chart-container .apexcharts-canvas {
+    width: 100% !important;
+}
