@@ -1,9 +1,14 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, Index
 from src.utils.db import Base
 
 
 class DriverLaps(Base):
     __tablename__ = "driver_laps"
+
+    # Composite index speeds up queries filtered by race + driver
+    __table_args__ = (
+        Index('ix_driver_laps_year_round_driver', 'year', 'round_number', 'driver_number'),
+    )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
 

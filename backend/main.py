@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from src.utils.db import Base, engine
 from src.models import DriverStanding, ConstructorStanding, Schedule, SessionResult, DriverLaps
-from src.routes import driver_standings_router, constructor_standings_router, schedule_router
+from src.routes import driver_standings_router, constructor_standings_router, schedule_router, driver_laps_router
 from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(engine)
@@ -24,3 +24,4 @@ app.add_middleware(
 app.include_router(driver_standings_router)
 app.include_router(constructor_standings_router)
 app.include_router(schedule_router)
+app.include_router(driver_laps_router)

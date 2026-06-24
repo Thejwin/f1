@@ -1,2 +1,3 @@
 from .standings_routes import driver_standings_router, constructor_standings_router
 from .schedule_routes import schedule_router
+from .driver_laps_routes import driver_laps_router
