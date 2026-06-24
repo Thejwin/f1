@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import { fetchSessionResults } from "../api";
+import PositionChart from "../components/position_change/PositionChart";
 import "./SessionResultsPage.css";
 
 const SessionResultsPage = () => {
@@ -72,6 +73,10 @@ const SessionResultsPage = () => {
                             </tbody>
                         </table>
                     </div>
+                )}
+
+                {sessionId === 'R' && !loading && results.length > 0 && (
+                    <PositionChart year={year} RoundNumber={round} />
                 )}
             </div>
         </>

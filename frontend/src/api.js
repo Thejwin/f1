@@ -12,3 +12,6 @@ export const fetchEventSessions = (year, round) =>
 
 export const fetchSessionResults = (year, round, sessionId) =>
   fetch(`http://127.0.0.1:8000/schedule/${year}/${round}/${sessionId}/results`).then((res) => res.json());
+
+export const fetchRaceLaps = (year, round) =>
+  fetch(`http://127.0.0.1:8000/laps/${year}/${round}`).then((res) => res.json());
