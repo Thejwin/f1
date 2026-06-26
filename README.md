@@ -109,8 +109,8 @@ npm run dev
 
 * [x] Championship Standings
 * [x] Race Schedule
-* [ ] Session Results
-* [ ] Race Pages
+* [x] Session Results
+* [x] Race Pages
 * [ ] Driver Profiles
 * [ ] Team Profiles
 * [ ] Telemetry Dashboard
