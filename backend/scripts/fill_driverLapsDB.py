@@ -86,4 +86,6 @@ def fill_driver_laps(year):
             time.sleep(1) # respect API rate limits
         
 if __name__ == "__main__":
-    fill_driver_laps(2018)
+    for yr in range(2019, 2027):
+        fill_driver_laps(yr)
+        time.sleep(30)

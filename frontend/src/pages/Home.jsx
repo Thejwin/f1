@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../components/navbar/navbar'
 import Hero from '../components/hero/hero'
-
 const Home = ({ driver, constructor }) => {
   return (
     <div>

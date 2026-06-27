@@ -11,8 +11,8 @@
   --accent: #e10600;
   --accent-bg: rgba(225, 6, 0, 0.12);
   --accent-border: rgba(225, 6, 0, 0.5);
-  --card-bg: rgba(255,255,255, 0.03);
-  --card-hover: rgba(255,255,255, 0.07);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-hover: rgba(255, 255, 255, 0.07);
   --social-bg: rgba(47, 48, 58, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
@@ -40,12 +40,12 @@
 
 body {
   margin: 0;
+  padding: 0;
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
@@ -65,20 +65,24 @@ h1 {
   font-size: 42px;
   letter-spacing: -1.2px;
   margin: 24px 0;
+
   @media (max-width: 1024px) {
     font-size: 30px;
     margin: 16px 0;
   }
 }
+
 h2 {
   font-size: 22px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 16px;
+
   @media (max-width: 1024px) {
     font-size: 18px;
   }
 }
+
 p {
   margin: 0;
 }
