@@ -14,8 +14,6 @@ from src.models.schedules_model import Schedule
 
 def _get_last_refresh(session) -> Optional[datetime.datetime]:
     res = session.query(func.max(DriverStanding.updated_at)).scalar()
-    if res and res.tzinfo is None:
-        res = res.replace(tzinfo=datetime.timezone.utc)
     return res
 
 def _get_last_completed_race_datetime(year: int) -> Optional[datetime.datetime]:
@@ -53,31 +51,26 @@ def _standing_row_to_dict(row, kind: str) -> Dict:
     }
     if kind == 'driver':
         result['driver_id'] = getattr(row, 'driverId', None)
-        
-        # Safe: The string formatting handles fallback gracefully, so .title() is safe here
-        result['full_name'] = f"{getattr(row, 'givenName', '')} {getattr(row, 'familyName', '')}".strip().title()
-        
+        result['full_name'] = getattr(row, 'givenName', '') + ' ' + getattr(row, 'familyName', '')
         names_list = getattr(row, 'constructorNames', None)
         if isinstance(names_list, str):
             try:
+                import json
                 names_list = json.loads(names_list)
+                if isinstance(names_list, str):  # Handle double serialization
+                    names_list = json.loads(names_list)
             except Exception:
-                names_list = None
-        
-        # Safe: Check that the index exists and is a string before running .title()
-        team = names_list[-1] if (names_list and isinstance(names_list, list) and len(names_list) > 0) else None
-        result['team_name'] = team.title() if isinstance(team, str) else None
-        
+                pass
+        result['team_name'] = names_list[-1] if isinstance(names_list, list) and names_list else None
         result['driver_code'] = getattr(row, 'driverCode', None)
         result['driver_number'] = getattr(row, 'driverNumber', None)
 
     elif kind == 'constructor':
-        # Safe: Pull the name first and check that it isn't None
-        c_name = getattr(row, 'constructorName', None)
-        result['team_name'] = c_name.title() if isinstance(c_name, str) else None
+        result['constructorId'] = getattr(row, 'constructorId', None)
+        result['constructorName'] = getattr(row, 'constructorName', None)
+        result['constructorNationality'] = getattr(row, 'constructorNationality', None)
     
     return result
-
 
 def recompute_and_store(year: int) -> Dict[str, List[Dict]]:
     ergast = Ergast()
@@ -96,10 +89,19 @@ def recompute_and_store(year: int) -> Dict[str, List[Dict]]:
             dob = str(r["dateOfBirth"]) if pd.notna(r["dateOfBirth"]) else None
             driver_nat = str(r["driverNationality"]) if pd.notna(r["driverNationality"]) else None
 
-            # Handle JSON fields safely (serialize lists/dicts into text strings)
-            c_ids = r["constructorIds"] if isinstance(r["constructorIds"], (str, bytes)) else json.dumps(r["constructorIds"])
-            c_names = r["constructorNames"] if isinstance(r["constructorNames"], (str, bytes)) else json.dumps(r["constructorNames"])
-            c_nats = r["constructorNationalities"] if isinstance(r["constructorNationalities"], (str, bytes)) else json.dumps(r["constructorNationalities"])
+            # Convert JSON strings to Python objects to prevent double serialization in JSON columns
+            def ensure_python_obj(val):
+                if isinstance(val, (str, bytes)):
+                    try:
+                        import json
+                        return json.loads(val)
+                    except Exception:
+                        return val
+                return val
+
+            c_ids = ensure_python_obj(r["constructorIds"])
+            c_names = ensure_python_obj(r["constructorNames"])
+            c_nats = ensure_python_obj(r["constructorNationalities"])
 
             driver_payload = {
                 "driverId": str(r["driverId"]),
@@ -171,16 +173,26 @@ def get_standings(kind: str = 'driver') -> Dict[str, List[Dict]]:
     except Exception:
         last_race_dt = None
     
+    if last_refresh and last_refresh.tzinfo is None:
+        last_refresh = last_refresh.replace(tzinfo=datetime.timezone.utc)
+    if last_race_dt and last_race_dt.tzinfo is None:
+        last_race_dt = last_race_dt.replace(tzinfo=datetime.timezone.utc)
+    
     if last_refresh and last_race_dt and last_refresh >= last_race_dt:
         with LocalSession() as session:
-            if kind == 'driver':
-                rows = session.query(DriverStanding).all()
-                return {'drivers': [_standing_row_to_dict(r, 'driver') for r in rows]}
-            rows = session.query(ConstructorStanding).all()
-            return {'constructors': [_standing_row_to_dict(r, 'constructor') for r in rows]}
+            # Auto-detect if database cache has invalid/null constructorNames (from the previous bug)
+            has_null_names = session.query(ConstructorStanding).filter(ConstructorStanding.constructorName == None).first() is not None
+            # Auto-detect if database cache is empty
+            is_empty = session.query(ConstructorStanding).count() == 0 or session.query(DriverStanding).count() == 0
+            
+            if not has_null_names and not is_empty:
+                if kind == 'driver':
+                    rows = session.query(DriverStanding).all()
+                    return {'drivers': [_standing_row_to_dict(r, 'driver') for r in rows]}
+                rows = session.query(ConstructorStanding).all()
+                return {'constructors': [_standing_row_to_dict(r, 'constructor') for r in rows]}
         
     result = recompute_and_store(year)
     if kind == 'driver':
-        return {'drivers': result['drivers']}
-    return {'constructors': result['constructors']}
-    
+        return {'drivers': result.get('drivers', [])}
+    return {'constructors': result.get('constructors', [])}

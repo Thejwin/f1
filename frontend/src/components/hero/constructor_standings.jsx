@@ -12,12 +12,12 @@ const Constructor_standings = ({ constructor }) => {
     <div className="standings-container">
       <div className='standings-list'>
         {standingsArray.map((entry, i) => (
-            <Standing_entry 
-                key={entry.team_name}
-                index={i + 1}
-                id={entry.team_name} 
-                team=""
-                points={entry.points_earned} />
+          <Standing_entry
+            key={entry.constructorId}
+            index={i + 1}
+            id={entry.constructorName}
+            team={entry.constructorNationality}
+            points={entry.points_earned} />
         ))}
       </div>
     </div>
